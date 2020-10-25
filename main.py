@@ -21,9 +21,16 @@ def get_fact():
     return facts[0].getText()
     # return fact.getText().strip()
 
+def piggyize():
+    payload = {'input_text': get_fact()}
+    piggy_site = 'https://hidden-journey-62459.herokuapp.com/piglatinize/'
+    response = request.post(piggy_site, data=payload, allow_redirects=False)
+    piggy_link = response.headers['Location']
+    return piggy_link
+
 @app.route('/')
 def home():
-    return "FILL ME!"
+    return piggyize()
 
 
 if __name__ == "__main__":
